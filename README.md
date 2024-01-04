@@ -1,19 +1,13 @@
-# CarCar
+# DriveSync
 
-CarCar is an application built to help car dealerships manage their inventory, sales, and service records.
-​
-Team:
-​
-- Zach - Service
-- Victoria - Sales
-  ​
+DriveSync is an application built to help car dealerships manage their inventory, sales, and service records.
 
 ## How to Run this App
 
 ** Required software includes Git, Docker and Node.JS **
 
 1. Fork and clone repository to your local machine:
-   git clone https://gitlab.com/zach-00/project-beta
+   git clone https://gitlab.com/vchiang/drive-sync.git
 
 2. Run the following commands in your terminal to create a volume, build an image, and run containers:
    docker volume create <<volume-name>>
@@ -24,19 +18,17 @@ Team:
 
 ## Design
 
-    CarCar is a microservices application made up of three separate services which communicate with one another via pollers. It integrates data and information application-wide to create a fully functional and efficient dealership data-management platform. The three microservices are Service, Sales, and Inventory.
-
-​
+    DriveSync is a microservices application made up of three separate services which communicate with one another via pollers. It integrates data and information application-wide to create a fully functional and efficient dealership data-management platform. The three microservices are Service, Sales, and Inventory.
 
 ## Diagram
 
-Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79f42a6436b9d8f24fde5fe1d03
+Link to diagram: https://fuchsia-bearskin-7d1.notion.site/DriveSync-Diagram-74e7a79f42a6436b9d8f24fde5fe1d03
 
 ## Service microservice
 
     The service microservice provides a way for a dealership to track service appointments, appointment history, technicians, customers, and date-times. This service integrates with inventory and sales to allow the tracking of whether a vehicle has been sold. The service appointments allow tracking based on status, whether it has been created, finished or canceled.
 
-    There is a poller set up which communicates with the inventory service to create value objects based off of inventory objects stored in the database. This allows the service microservice to have a reference for automobiles that have have been sold, giving those customers VIP status when creating a service appointment.
+    There is a poller set up which communicates with the inventory service to create value objects based off of inventory objects stored in the database. This allows the service microservice to have a reference for automobiles that have been sold, giving those customers VIP status when creating a service appointment.
 
 ## Sales microservice
 
@@ -64,8 +56,8 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
             {
     "technicians": [
     	{
-    		"first_name": "Zach",
-    		"last_name": "Walkowiak",
+    		"first_name": "John",
+    		"last_name": "Martin",
     		"employee_id": "12345",
     		"id": 1
     	},
@@ -96,11 +88,11 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
 
 
 
-    TECHNICIAN DETAILS: This endpoint returns all the details of a specific technician. No data input is required. However, you must specify the technicians ID number in the URL when sending the GET request.
-        EXPECTED REPONSE:
+    TECHNICIAN DETAILS: This endpoint returns all the details of a specific technician. No data input is required. However, you must specify the technician's ID number in the URL when sending the GET request.
+        EXPECTED RESPONSE:
             {
-                "first_name": "Zach",
-                "last_name": "Walkowiak",
+                "first_name": "John",
+                "last_name": "Martin",
                 "employee_id": 12345,
                 "id": 1
             }
@@ -137,8 +129,8 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
     		"customer": "James Bond",
     		"id": 3,
     		"technician": {
-    			"first_name": "Zach",
-    			"last_name": "Walkowiak",
+    			"first_name": "John",
+    			"last_name": "Martin",
     			"employee_id": "12345",
     			"id": 1
     		}
@@ -164,7 +156,7 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
         EXAMPLE INPUT:
             {
                 "date_time": "2024-01-10T13:30:00.610386+00:00",
-                "reason": "Windshiled Replacement",
+                "reason": "Windshield Replacement",
                 "status": "Created",
                 "vin": "1C3CC5FB2AN120382",
                 "customer": "James Bond",
@@ -174,7 +166,7 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
         EXPECTED RESPONSE:
             {
                 "date_time": "2024-01-10T13:30:00.610386+00:00",
-                "reason": "Windshiled Replacement",
+                "reason": "Windshield Replacement",
                 "status": "Created",
                 "vin": "1C3CC5FB2AN120382",
                 "customer": "James Bond",
@@ -230,8 +222,8 @@ Link to diagram: https://fuchsia-bearskin-7d1.notion.site/CarCar-Diagram-74e7a79
                 "customer": "John Smith",
                 "id": 4,
                 "technician": {
-                    "first_name": "Zach",
-                    "last_name": "Walkowiak",
+                    "first_name": "John",
+                    "last_name": "Martin",
                     "employee_id": "12345",
                     "id": 1
                 }
@@ -460,7 +452,8 @@ Action | Method | URL
                 "deleted": "true"
             }
 
-  ​
+​
+
 ## Value Objects
 
     Both the Service Microservice and the Sales Microservice have one value object each: the AutomobileVO object in Service, and the AutoVO object in Sales. They both store a VIN number and sold status.
