@@ -55,9 +55,13 @@ function SalesList() {
         <tbody>
           {sales
             .filter((sale) => {
+              function fullName() {
+                return `${sale.salesperson.first_name} ${sale.salesperson.last_name}`;
+              }
+
               return search === ""
                 ? sale
-                : sale.salesperson.employee_id.includes(search);
+                : fullName().toLowerCase().includes(search);
             })
             .map((sale) => {
               return (
